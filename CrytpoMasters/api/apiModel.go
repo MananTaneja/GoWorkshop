@@ -1,5 +1,6 @@
 package api
 
+// `json:""` - json marshal library reads this, as there are difference in the way json handles keys and how Go handles them
 type ApiResponse struct {
 	Timestamp             string  `json:"timestamp"`
 	Low                   string  `json:"low"`
