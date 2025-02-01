@@ -1,16 +1,16 @@
 
 const obs = new PerformanceObserver(list => {
-    const entries = list.getEntries();
-    console.log(entries);
- });
- obs.observe({entryTypes: ["largest-contentful-paint", "layout-shift", "first-input", "paint"], 
-                    buffered: true});
- 
+    const entries = list.getEntries()
+    console.log(entries)
+})
+//  obs.observe({entryTypes: ["largest-contentful-paint", "layout-shift", "first-input", "paint"], 
+// buffered: true});
+
 
 
 async function load() {
-    const response = await fetch("gallery/data.json");
-    const data = await response.json();
+    const response = await fetch("gallery/data.json")
+    const data = await response.json()
     data.forEach(exhibition => {
         const article = `
             <article>
@@ -18,9 +18,9 @@ async function load() {
                 <p>${exhibition.description}</p>
                 <img src="gallery/${exhibition.image}" loading="lazy">
             </article>
-        `;
-        document.querySelector("main").innerHTML += article;
-    });
+        `
+        document.querySelector("main").innerHTML += article
+    })
 }
 
-window.addEventListener("DOMContentLoaded", load);
+window.addEventListener("DOMContentLoaded", load)
