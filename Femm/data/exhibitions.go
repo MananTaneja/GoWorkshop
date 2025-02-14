@@ -10,7 +10,7 @@ func GetAll() []Exhibition {
 	return list
 }
 
-func addExhibition(data Exhibition) {
+func AddExhibition(data Exhibition) {
 	list = append(list, data)
 }
 

@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"manantaneja.com/go/frontend-masters-museum/api"
 	"manantaneja.com/go/frontend-masters-museum/data"
 )
 
@@ -13,14 +14,14 @@ func handleHello(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleTemplate(w http.ResponseWriter, r *http.Request) {
-	html, err := template.ParseFiles("./templates/index.templ")
+	html, err := template.ParseFiles("/Users/manan/Developer/GoWorkshop/Femm/templates/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Unable to parse files"))
 		return
 	}
 
-	err = html.Execute(w, data.GetAll()[0])
+	err = html.Execute(w, data.GetAll())
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -34,6 +35,8 @@ func main() {
 	server := http.NewServeMux()
 	server.HandleFunc("/hello", handleHello)
 	server.HandleFunc("/template", handleTemplate)
+	server.HandleFunc("/api/exhibitions", api.Get)
+	server.HandleFunc("/api/exhibitions/new", api.Post)
 	fs := http.FileServer(http.Dir("./public"))
 	server.Handle("/", fs)
 	err := http.ListenAndServe(":8080", server)
